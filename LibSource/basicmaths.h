@@ -67,8 +67,8 @@
 }
 #endif
 
-#define malloc(x) pvPortMalloc(x)
-#define free(x) vPortFree(x)
+//#define malloc(x) pvPortMalloc(x)
+//#define free(x) vPortFree(x)
 
 #ifdef ARM_CORTEX
 #define sin(x) arm_sin_f32(x)

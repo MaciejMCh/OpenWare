@@ -14,21 +14,21 @@ PatchProcessor::~PatchProcessor(){
 }
 
 void PatchProcessor::run(){
-  if(patch == NULL)
-    return;
-  ProgramVector* vector = getProgramVector();
-  // ASSERT(vector->audio_input != NULL, "Audio input must not be NULL");
-  // ASSERT(vector->audio_output != NULL, "Audio output must not be NULL");
-  // todo: make sure these are set before run is called
-  // ASSERT(vector->audio_blocksize != 0, "Audio blocksize must not be 0");
-  ASSERT(vector->audio_samplingrate != 0, "Audio samplingrate must not be 0");
-  for(;;){
-    vector->programReady();
-    buffer.split(vector->audio_input, vector->audio_blocksize);
-    setParameterValues(vector->parameters);
-    patch->processAudio(buffer);
-    buffer.comb(vector->audio_output);
-  }
+//  if(patch == NULL)
+//    return;
+//  ProgramVector* vector = getProgramVector();
+//  // ASSERT(vector->audio_input != NULL, "Audio input must not be NULL");
+//  // ASSERT(vector->audio_output != NULL, "Audio output must not be NULL");
+//  // todo: make sure these are set before run is called
+//  // ASSERT(vector->audio_blocksize != 0, "Audio blocksize must not be 0");
+//  ASSERT(vector->audio_samplingrate != 0, "Audio samplingrate must not be 0");
+//  for(;;){
+//    vector->programReady();
+//    buffer.split(vector->audio_input, vector->audio_blocksize);
+//    setParameterValues(vector->parameters);
+//    patch->processAudio(buffer);
+//    buffer.comb(vector->audio_output);
+//  }
 }
 
 void PatchProcessor::setPatch(Patch* p){

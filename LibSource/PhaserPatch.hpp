@@ -58,13 +58,13 @@ class PhaserPatch : public Patch {
 public:
   //initialise to some usefull defaults...
   PhaserPatch()  : _lfoPhase( 0.f ), depth( 1.f ), feedback( .7f ), _zm1( 0.f ){
-    registerParameter(PARAMETER_A, "Rate", "Phaser speed");
-    registerParameter(PARAMETER_B, "Depth", "Depth of modulation");
-    registerParameter(PARAMETER_C, "Feedback", "Amount of feedback");
-    registerParameter(PARAMETER_D, "");
+//    registerParameter(PARAMETER_A, "Rate", "Phaser speed");
+//    registerParameter(PARAMETER_B, "Depth", "Depth of modulation");
+//    registerParameter(PARAMETER_C, "Feedback", "Amount of feedback");
+//    registerParameter(PARAMETER_D, "");
     Range( 440.f, 1600.f );
     Rate( .5f );
-    ASSERT(getSampleRate() == 48000, "Invalid sample rate");
+//    ASSERT(getSampleRate() == 48000, "Invalid sample rate");
     ASSERT(getBlockSize() <= 1024, "Invalid blocksize > 1024");
     ASSERT(getBlockSize() >= 16, "Invalid blocksize < 16");
   }
@@ -84,9 +84,9 @@ public:
     int size  = buffer.getSize();
     float y;
         
-    rate      = Rate(getParameterValue(PARAMETER_A));
-    depth     = getParameterValue(PARAMETER_B);
-    feedback  = getParameterValue(PARAMETER_C);
+      rate      = 0.009;//Rate(getParameterValue(PARAMETER_A));
+      depth     = 0.5;//getParameterValue(PARAMETER_B);
+      feedback  = 0.5;//getParameterValue(PARAMETER_C);
         
     //calculate and update phaser sweep lfo...
     float d  = _dmin + (_dmax-_dmin) * ((sin( _lfoPhase ) + 1.f)/2.f);

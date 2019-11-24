@@ -1,6 +1,6 @@
 #include "FloatArray.h"
 #include "basicmaths.h"
-#include "message.h"
+//#include "message.h"
 #include <string.h>
 
  FloatArray::FloatArray() :
@@ -45,7 +45,7 @@ int FloatArray::getMinIndex(){
 }
 
 void FloatArray::getMax(float* value, int* index){
-  ASSERT(size>0, "Wrong size");
+  //ASSERT(size>0, "Wrong size");
 /// @note When built for ARM Cortex-M processor series, this method uses the optimized <a href="http://www.keil.com/pack/doc/CMSIS/General/html/index.html">CMSIS library</a>
 #ifdef ARM_CORTEX 
   unsigned long idx;
@@ -232,7 +232,7 @@ void FloatArray::clip(float min, float max){
   }
 }
 FloatArray FloatArray::subArray(int offset, int length){
-  ASSERT(size >= offset+length, "Array too small");
+  //ASSERT(size >= offset+length, "Array too small");
   return FloatArray(data+offset, length);
 }
 
@@ -247,7 +247,7 @@ void FloatArray::copyFrom(FloatArray source){
 }
 
 void FloatArray::copyTo(float* other, int length){
-  ASSERT(size >= length, "Array too small");
+  //ASSERT(size >= length, "Array too small");
 /// @note When built for ARM Cortex-M processor series, this method uses the optimized <a href="http://www.keil.com/pack/doc/CMSIS/General/html/index.html">CMSIS library</a>
 #ifdef ARM_CORTEX
   arm_copy_f32(data, other, length);
@@ -257,7 +257,7 @@ void FloatArray::copyTo(float* other, int length){
 }
 
 void FloatArray::copyFrom(float* other, int length){
-  ASSERT(size >= length, "Array too small");
+  //ASSERT(size >= length, "Array too small");
 /// @note When built for ARM Cortex-M processor series, this method uses the optimized <a href="http://www.keil.com/pack/doc/CMSIS/General/html/index.html">CMSIS library</a>
 #ifdef ARM_CORTEX
   arm_copy_f32(other, data, length);
@@ -267,8 +267,8 @@ void FloatArray::copyFrom(float* other, int length){
 }
 
 void FloatArray::insert(FloatArray source, int sourceOffset, int destinationOffset, int samples){
-  ASSERT(size >= destinationOffset+samples, "Array too small");
-  ASSERT(source.size >= sourceOffset+samples, "Array too small");
+  //ASSERT(size >= destinationOffset+samples, "Array too small");
+  //ASSERT(source.size >= sourceOffset+samples, "Array too small");
 /// @note When built for ARM Cortex-M processor series, this method uses the optimized <a href="http://www.keil.com/pack/doc/CMSIS/General/html/index.html">CMSIS library</a>
 #ifdef ARM_CORTEX
   arm_copy_f32(source.data+sourceOffset, data+destinationOffset, samples);  
@@ -283,7 +283,7 @@ void FloatArray::insert(FloatArray source, int destinationOffset, int samples){
 }
 
 void FloatArray::move(int fromIndex, int toIndex, int samples){
-  ASSERT(size >= toIndex+samples, "Array too small");
+  //ASSERT(size >= toIndex+samples, "Array too small");
   memmove(data+toIndex, data+fromIndex, samples*sizeof(float)); //TODO: evaluate if it is appropriate to use arm_copy_f32 for this method
 }
 
@@ -299,7 +299,7 @@ void FloatArray::setAll(float value){
 }
 
 void FloatArray::add(FloatArray operand2, FloatArray destination){ //allows in-place
-  ASSERT(operand2.size == size &&  destination.size==size, "Arrays must be same size");
+  //ASSERT(operand2.size == size &&  destination.size==size, "Arrays must be same size");
 /// @note When built for ARM Cortex-M processor series, this method uses the optimized <a href="http://www.keil.com/pack/doc/CMSIS/General/html/index.html">CMSIS library</a>
 #ifdef ARM_CORTEX
   /* despite not explicitely documented in the CMSIS documentation,
@@ -326,7 +326,7 @@ void FloatArray::add(float scalar){
 }
 
 void FloatArray::subtract(FloatArray operand2, FloatArray destination){ //allows in-place
-  ASSERT(operand2.size == size && destination.size==size, "Arrays must be same size");
+  //ASSERT(operand2.size == size && destination.size==size, "Arrays must be same size");
   /// @note When built for ARM Cortex-M processor series, this method uses the optimized <a href="http://www.keil.com/pack/doc/CMSIS/General/html/index.html">CMSIS library</a>
 #ifdef ARM_CORTEX
   /* despite not explicitely documented in the CMSIS documentation,
@@ -353,7 +353,7 @@ void FloatArray::subtract(float scalar){
 }
 
 void FloatArray::multiply(FloatArray operand2, FloatArray destination){ //allows in-place
-  ASSERT(operand2.size == size &&  destination.size==size, "Arrays must be same size");
+  //ASSERT(operand2.size == size &&  destination.size==size, "Arrays must be same size");
   /// @note When built for ARM Cortex-M processor series, this method uses the optimized <a href="http://www.keil.com/pack/doc/CMSIS/General/html/index.html">CMSIS library</a>
 #ifdef ARM_CORTEX
   /* despite not explicitely documented in the CMSIS documentation,
@@ -402,8 +402,8 @@ void FloatArray::noise(){
 void FloatArray::noise(float min, float max){
   float amplitude = fabs(max-min);
   float offset = min;
-  ASSERT(getSize()>10, "10<getSize");
-  ASSERT(size==getSize(), "getSize");
+  //ASSERT(getSize()>10, "10<getSize");
+  //ASSERT(size==getSize(), "getSize");
   for(int n=0; n<size; n++){
     data[n]=(rand()/(RAND_MAX+1.0f)) * amplitude + offset;
   }
@@ -411,7 +411,7 @@ void FloatArray::noise(float min, float max){
 
 
 void FloatArray::convolve(FloatArray operand2, FloatArray destination){
-  ASSERT(destination.size >= size + operand2.size -1, "Destination array too small");
+  //ASSERT(destination.size >= size + operand2.size -1, "Destination array too small");
 /// @note When built for ARM Cortex-M processor series, this method uses the optimized <a href="http://www.keil.com/pack/doc/CMSIS/General/html/index.html">CMSIS library</a>
 #ifdef ARM_CORTEX
   arm_conv_f32(data, size, operand2.data, operand2.size, destination);
@@ -430,7 +430,7 @@ void FloatArray::convolve(FloatArray operand2, FloatArray destination){
 }
 
 void FloatArray::convolve(FloatArray operand2, FloatArray destination, int offset, int samples){
-  ASSERT(destination.size >= size + operand2.size -1, "Destination array too small"); //TODO: change this condition to the actual size being written(will be samples+ tail)
+  //ASSERT(destination.size >= size + operand2.size -1, "Destination array too small"); //TODO: change this condition to the actual size being written(will be samples+ tail)
 /// @note When built for ARM Cortex-M processor series, this method uses the optimized <a href="http://www.keil.com/pack/doc/CMSIS/General/html/index.html">CMSIS library</a>
 #ifdef ARM_CORTEX
   //TODO: I suspect a bug in arm_conv_partial_f32
@@ -463,7 +463,7 @@ void FloatArray::correlate(FloatArray operand2, FloatArray destination){
   correlateInitialized(operand2, destination);
 }
 void FloatArray::correlateInitialized(FloatArray operand2, FloatArray destination){
-  ASSERT(destination.size >= size+operand2.size-1, "Destination array too small"); //TODO: change CMSIS docs, which state a different size
+  //ASSERT(destination.size >= size+operand2.size-1, "Destination array too small"); //TODO: change CMSIS docs, which state a different size
 /// @note When built for ARM Cortex-M processor series, this method uses the optimized <a href="http://www.keil.com/pack/doc/CMSIS/General/html/index.html">CMSIS library</a>
 #ifdef ARM_CORTEX
   arm_correlate_f32(data, size, operand2.data, operand2.size, destination);

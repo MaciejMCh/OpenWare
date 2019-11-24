@@ -1,6 +1,6 @@
 #include "main.h"
-#include "stm32f4xx_hal.h"
-#include "stm32f4xx_hal_flash_ex.h"
+//#include "stm32f4xx_hal.h"
+//#include "stm32f4xx_hal_flash_ex.h"
 
 /* #define OWL_TESSERACT_REV4 // SWO mapped to toggle */
 
